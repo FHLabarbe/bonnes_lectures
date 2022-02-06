@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index bibliothèque{% endblock %}
+
+{% block body %}
+    <h1>Index bibliothèque</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Editeur</th>
+                <th>Année</th>
+                <th>Isbn</th>
+                <th>Résumé</th>
+                <th>Couverture</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.publisher }}</td>
+                <td>{{ book.year }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.backcover }}</td>
+                <td>{{ book.cover ? 'oui' : 'non' }}</td>
+                <td>
+                    <a href="{{ path('book_show', {'id': book.id}) }}">voir</a>
+                    <a href="{{ path('book_edit', {'id': book.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ user }}
+    <a href="{{ path('book_new') }}">Créer nouveau</a>
+{% endblock %}
